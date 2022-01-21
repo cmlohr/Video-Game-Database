@@ -1,6 +1,7 @@
 # Video Game Database
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.  
+
 And a live demo is hosted on GCP: https://video-game-db-338915.uc.r.appspot.com/
 
 ## Development server
