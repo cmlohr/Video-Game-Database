@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.AppRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var details_component_1 = require("./components/details/details.component");
 var home_component_1 = require("./components/home/home.component");
 var routes = [
     {
@@ -18,6 +19,10 @@ var routes = [
     {
         path: 'search/:game-search',
         component: home_component_1.HomeComponent
+    },
+    {
+        path: 'details/:id',
+        component: details_component_1.DetailsComponent
     }
 ];
 var AppRoutingModule = /** @class */ (function () {

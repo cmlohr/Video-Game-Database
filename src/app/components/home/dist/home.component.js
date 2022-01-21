@@ -1,0 +1,57 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+exports.__esModule = true;
+exports.HomeComponent = void 0;
+var core_1 = require("@angular/core");
+var HomeComponent = /** @class */ (function () {
+    function HomeComponent(httpService, router, activatedRoute) {
+        this.httpService = httpService;
+        this.router = router;
+        this.activatedRoute = activatedRoute;
+    }
+    HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.routeSub = this.activatedRoute.params.subscribe(function (params) {
+            if (params['game-search']) {
+                _this.searchGames('metacrit', params['game-search']);
+            }
+            else {
+                _this.searchGames('metacrit');
+            }
+        });
+    };
+    HomeComponent.prototype.searchGames = function (sort, search) {
+        var _this = this;
+        this.gameSub = this.httpService
+            .getGameList(sort, search)
+            .subscribe(function (gameList) {
+            _this.games = gameList.results;
+            console.log(gameList);
+        });
+    };
+    HomeComponent.prototype.openGameDetails = function (id) {
+        this.router.navigate(['details', id]);
+    };
+    HomeComponent.prototype.ngOnDestroy = function () {
+        if (this.gameSub) {
+            this.gameSub.unsubscribe();
+        }
+        if (this.routeSub) {
+            this.routeSub.unsubscribe();
+        }
+    };
+    HomeComponent = __decorate([
+        core_1.Component({
+            selector: 'app-home',
+            templateUrl: './home.component.html',
+            styleUrls: ['./home.component.scss']
+        })
+    ], HomeComponent);
+    return HomeComponent;
+}());
+exports.HomeComponent = HomeComponent;
